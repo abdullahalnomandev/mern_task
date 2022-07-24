@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
-import HotelRoutes from "./routes/hotelsRoutes.js";
 import cors from "cors";
 const app = express();
 import globalErrorHandler from "./controllers/errorController.js";
@@ -16,7 +15,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use("/api/hotels", HotelRoutes);
 app.use("/api/auth", AuthRoutes);
 
 // Error Handler

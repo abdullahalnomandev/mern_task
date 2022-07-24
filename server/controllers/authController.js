@@ -7,7 +7,6 @@ const signUp = async (req, res, next) => {
 
   const { name, email, password, passwordConfirm } = req.body;
   const hash = await bcrypt.hash(password, 8);
-
   try {
     if (password !== passwordConfirm) {
       return next(new AppError("Passwords don't match", 400));
