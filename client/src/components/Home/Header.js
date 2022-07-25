@@ -1,18 +1,16 @@
 import React from 'react';
-import {Container,Navbar,Nav} from 'react-bootstrap';
+import { PageHeader } from "antd";
+
+
 const Header = () => {
+ 
     return (
       <div>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="ml-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
+        <PageHeader
+          className="site-page-header"
+          title="Users"
+          style={{ background: "#7099e3", color: "rgb(158 202 247 / 89%)" }}
+        />
       </div>
     );
 };

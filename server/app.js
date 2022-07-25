@@ -6,6 +6,7 @@ import cors from "cors";
 const app = express();
 import globalErrorHandler from "./controllers/errorController.js";
 import AuthRoutes from "./routes/authRoutes.js";
+import UserRoutes from "./routes/usersRoutes.js";
 import AppError from "./utils/appError.js";
 import cookieParser from "cookie-parser";
 
@@ -16,13 +17,15 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", AuthRoutes);
+app.use("/api/users", UserRoutes);
+
 
 // Error Handler
 app.all("*", (req, res, next) => {
-  // next(AppError(`Can't find ${req.originalUrl} on this server`, 404));
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 app.use(globalErrorHandler);
+
 
 // Connection
 const connection = async () => {
@@ -39,3 +42,6 @@ app.listen(5000 || process.env.PORT, () => {
   connection();
   console.log("connected");
 });
+
+
+
