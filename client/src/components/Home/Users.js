@@ -1,8 +1,10 @@
 import { Space, Table, Tag } from "antd";
-import React, { useEffect } from "react";
-import axios from "axios";
-import { getData } from "../../apis/commonServices";
-import { GET_USERS } from "../../apis/ApiConstant";
+import React  from "react";
+import { GET_USERS } from "../../api/ApiConstant";
+import { getData } from "../../api/commonServices";
+import useSWR from "swr";
+import useFetch from "../../hooks/useFetch";
+
 
 const Users = () => {
   const columns = [
@@ -13,84 +15,26 @@ const Users = () => {
       render: (text) => <a>{text}</a>
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age"
+      title: "E-mail",
+      dataIndex: "email",
+      key: "email"
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address"
-    },
-    {
-      title: "Tags",
-      key: "tags",
-      dataIndex: "tags",
-      render: (_, { tags }) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? "geekblue" : "green";
-
-            if (tag === "loser") {
-              color = "volcano";
-            }
-
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </>
-      )
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
-        </Space>
-      )
-    }
-  ];
-  const data = [
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"]
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"]
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sidney No. 1 Lake Park",
-      tags: ["cool", "teacher"]
+      title: "Role",
+      dataIndex: "isAdmin",
+      key: "isAdmin",
+      render: (text) => <a>{text ?'Admin':'User'}</a>
     }
   ];
 
- const getPost = async () => {
-  try {
-    const { data } = await getData(GET_USERS);
-      console.log(data);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-getPost()
+
+const {data:{data}}=useFetch(GET_USERS);
+
+console.log(data);
+
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={data} pagination={false} />
     </div>
   );
 };

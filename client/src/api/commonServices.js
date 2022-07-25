@@ -1,18 +1,9 @@
-import axios from "axios";
-import { API_BASE_URL, GET_USERS } from "./ApiConstant";
+import { API } from "./ApiInterceptor";
 
 
 // USERS
- const getData = (api_url) => API.get(api_url);
+ const getData =  (api_url) =>  API.get(api_url);
 //  const getData = async (URL) => await API.get(URL);
-
-// const getData = async (URL) =>{
-//     const response = await API.get(URL);
-//     return response;
-// }
-
-
-
 //  const createPost = (newPost) => API.post("/posts", newPost);
 //  const updatePost = (id, updatePost) =>  API.patch(`posts/${id}`, updatePost);
 //  const deletePost = (id) => API.delete(`posts/${id}`);
