@@ -2,7 +2,6 @@ import Users from "../models/usersModel.js";
 import AppError from "../utils/appError.js";
 
 
-
 const getUsers =async (req,res,next) => {
 
     try {

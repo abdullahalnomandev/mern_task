@@ -1,5 +1,5 @@
-import { Space, Table, Tag } from "antd";
-import React  from "react";
+import { Pagination, Space, Table, Tag } from "antd";
+import React, { useState }  from "react";
 import { GET_USERS } from "../../api/ApiConstant";
 import { getData } from "../../api/commonServices";
 import useSWR from "swr";
@@ -7,6 +7,8 @@ import useFetch from "../../hooks/useFetch";
 
 
 const Users = () => {
+    const [current, setCurrent] = useState(3);
+
   const columns = [
     {
       title: "Name",
@@ -30,11 +32,15 @@ const Users = () => {
 
 const {data:{data}}=useFetch(GET_USERS);
 
-console.log(data);
 
+  const onChange = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
   return (
     <div>
       <Table columns={columns} dataSource={data} pagination={false} />
+      <Pagination current={current} onChange={onChange} total={100} />{" "}
     </div>
   );
 };
